@@ -1,7 +1,7 @@
-CC = gcc
+CC = g++
 CFLAGS = -O2 -g -Wall 
 
-SOURCES = greenrain.cpp
+SOURCES = greenrain.cpp dropflow.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 TARGET = greenrain
 
@@ -11,7 +11,7 @@ TARGET = greenrain
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) -o $@ $(OBJECTS) 
+	$(CC) -o $@ $(OBJECTS) -lcurses
 
 clean: 
 	rm -rvf $(OBJECTS) $(TARGET)
