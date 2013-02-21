@@ -10,14 +10,16 @@
 class DropFlow
 {
 public:
-	DropFlow(WINDOW * win, int row, int span = 1, int indent = 0);
+	DropFlow(WINDOW * win, int index, bool is_vertial = false, 
+			int span = 1, int indent = 0);
 	virtual ~DropFlow();
 	void setSpan(int span);
 	void display();
 	void move();
 	void transform();
 private:
-	int _row;
+	int _index;
+	int _length;
 	std::string _str;
 	WINDOW *_win;
 	int _span;

@@ -1,15 +1,15 @@
 #include "dropflow.h"
 
-DropFlow::DropFlow(WINDOW *win, int row, int span, int indent)
+DropFlow::DropFlow(WINDOW *win, int index, bool is_vertical, int span, int indent)
 {
 	_win = win;
-	_row = row;
+	_index = index;
 	_span = span;
 	_counter = 0;
 	_fillspace = indent;
+	_length = is_vertical? LINES : COLS;
 
-	_str.resize(COLS, ' ');
-
+	_str.resize(_length, ' ');
 }
 
 DropFlow::~DropFlow()
@@ -29,12 +29,12 @@ void DropFlow::display()
 	this->move();
 
 	wattron(_win, COLOR_PAIR(1));
-	mvwprintw(_win, _row, 0, "%s", _str.c_str());
+	mvwprintw(_win, _index, 0, "%s", _str.c_str());
 
 	wattron(_win, A_BOLD);
 	for (std::vector<int>::iterator it = _headers.begin(); it != _headers.end(); it++) {
-		chtype c = mvwinch(_win, _row, *it);
-		mvwaddch(_win, _row, *it, c);
+		chtype c = mvwinch(_win, _index, *it);
+		mvwaddch(_win, _index, *it, c);
 	}
 	wattroff(_win, A_BOLD);
 
@@ -45,9 +45,9 @@ void DropFlow::move()
 {
 	char c = ' ' + rand() % 95; 
 	if ( c == ' ' ) {
-		_fillspace = rand() % (COLS / 2);
+		_fillspace = rand() % (_length / 2);
 
-		if (_fillspace > COLS / 4)
+		if (_fillspace > _length / 4)
 			this->setSpan(rand() % 8);
 	}
 
@@ -55,21 +55,21 @@ void DropFlow::move()
 		_headers.insert(_headers.begin(), 0);
 
 	_str.insert(_str.begin(), _fillspace && _fillspace--? ' ': c);
-	_str.resize(COLS, '*');
+	_str.resize(_length, '*');
 
 	for (std::vector<int>::iterator it = _headers.begin(); it != _headers.end(); ++it)
 		(*it)++;
 
-	if (_headers.size() && _headers.back() >= COLS)
+	if (_headers.size() && _headers.back() >= _length)
 		_headers.pop_back();
 }
 
 void DropFlow::transform()
 {
-	int count = rand() % (COLS / 8);
+	int count = rand() % (_length / 8);
 
 	while (count--) {
-		int index = rand() % COLS;
+		int index = rand() % _length;
 
 		if (_str.at(index) == ' ') continue;
 

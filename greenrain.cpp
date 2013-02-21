@@ -20,7 +20,7 @@ int main(int argc, char ** argv)
 	init_pair(1, COLOR_GREEN, 0);
 
 	for (int i=0; i<LINES; i++)
-		flows.push_back(DropFlow(stdscr, i, rand() % 8));
+		flows.push_back(DropFlow(stdscr, i, false, rand() % 8));
 
 	while(getch() != 'q') {
 		for (std::vector<DropFlow>::iterator it = flows.begin() ; it != flows.end(); ++it)
