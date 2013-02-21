@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <string>
 #include <curses.h>
+#include <vector>
 
 class DropFlow
 {
@@ -22,6 +23,7 @@ private:
 	int _span;
 	int _counter;
 	int _fillspace;
+	std::vector<int> _headers;
 };
 
 #endif
