@@ -7,6 +7,9 @@ DropFlow::DropFlow(WINDOW *win, int col, int row, const char * str)
 	_row = row;
 
 	_str = str;
+
+	for (char c=' '; c<'z'; c++)
+		_str += c;
 }
 
 DropFlow::~DropFlow()
@@ -33,5 +36,5 @@ void DropFlow::display()
 
 void DropFlow::move()
 {
-	_col--;
+	_col++;
 }
