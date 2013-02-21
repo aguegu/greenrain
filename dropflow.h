@@ -8,11 +8,12 @@
 class DropFlow
 {
 public:
-	DropFlow(WINDOW * win);
+	DropFlow(WINDOW * win, int col, int row, const char *str);
 	virtual ~DropFlow();
 	void display();
+	void move();
 private:
-	int _c, _r;
+	int _col, _row;
 	std::string _str;
 	WINDOW *_win;
 };

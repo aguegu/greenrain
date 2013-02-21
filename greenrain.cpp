@@ -3,27 +3,20 @@
 #include <curses.h>
 #include "dropflow.h"
 
-void display()
-{
-	static int c=140, r=0;
-	clear();
-	move(r, c++);
-	printw("(%d, %d)", c, r);
-	refresh();
-}
-
 int main(int argc, char ** argv)
 {
 	initscr();
 	cbreak();
 	noecho();
-	timeout(1000);
+	timeout(200);
 
-	DropFlow df(stdscr);
+	DropFlow df(stdscr, COLS, 0, "hi");
 
 	while(getch() != 'q') {
 //		display();
+		clear();
 		df.display();
+		df.move();
 		refresh();
 	}
 	endwin();
