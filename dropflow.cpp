@@ -1,13 +1,13 @@
 #include "dropflow.h"
 
-DropFlow::DropFlow(WINDOW *win, int index, bool is_vertical, int span, int indent)
+DropFlow::DropFlow(WINDOW *win, int index, int span, int indent)
 {
 	_win = win;
 	_index = index;
 	_span = span;
 	_counter = 0;
 	_fillspace = indent;
-	_length = is_vertical? LINES : COLS;
+	_length = COLS;
 
 	_str.resize(_length, ' ');
 }
@@ -21,10 +21,15 @@ void DropFlow::setSpan(int span)
 	_span = span;
 }
 
-void DropFlow::display()
+void DropFlow::refresh()
 {
 	if (_counter++ < _span) return;
+	this->display();
+	_counter = 0;
+}
 
+void DropFlow::display()
+{
 	this->transform();
 	this->move();
 
@@ -37,8 +42,6 @@ void DropFlow::display()
 		mvwaddch(_win, _index, *it, c);
 	}
 	wattroff(_win, A_BOLD);
-
-	_counter = 0;
 }
 
 void DropFlow::move()

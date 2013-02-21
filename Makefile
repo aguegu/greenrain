@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -O2 -g -Wall 
 
-SOURCES = greenrain.cpp dropflow.cpp
+SOURCES = greenrain.cpp dropflow.cpp dropflow_v.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 TARGET = greenrain
 
