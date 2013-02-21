@@ -9,6 +9,7 @@ DropFlow::DropFlow(WINDOW *win, int row, int span, int indent)
 	_fillspace = indent;
 
 	_str.resize(COLS, ' ');
+
 }
 
 DropFlow::~DropFlow()
@@ -27,14 +28,15 @@ void DropFlow::display()
 	this->transform();
 	this->move();
 
+	wattron(_win, COLOR_PAIR(1));
 	mvwprintw(_win, _row, 0, "%s", _str.c_str());
 
-	attron(A_BOLD);
+	wattron(_win, A_BOLD);
 	for (std::vector<int>::iterator it = _headers.begin(); it != _headers.end(); it++) {
 		chtype c = mvwinch(_win, _row, *it);
 		mvwaddch(_win, _row, *it, c);
 	}
-	attroff(A_BOLD);
+	wattroff(_win, A_BOLD);
 
 	_counter = 0;
 }
@@ -64,7 +66,7 @@ void DropFlow::move()
 
 void DropFlow::transform()
 {
-	int count = rand() % (COLS / 2);
+	int count = rand() % (COLS / 8);
 
 	while (count--) {
 		int index = rand() % COLS;

@@ -10,10 +10,14 @@ int main(int argc, char ** argv)
 	cbreak();
 	noecho();
 	curs_set(0);
+
+	start_color();
+
 	timeout(20);
 
 	std::vector<DropFlow> flows;
-	//flows.reserve(LINES);
+
+	init_pair(1, COLOR_GREEN, 0);
 
 	for (int i=0; i<LINES; i++)
 		flows.push_back(DropFlow(stdscr, i, rand() % 8));
