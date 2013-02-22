@@ -10,7 +10,7 @@
 class DropFlow
 {
 public:
-	DropFlow(WINDOW * win, int index, int span = 1, int indent = 0);
+	DropFlow(WINDOW * win, int index, int span = 1, int color_pair = 0, int indent = 0);
 	virtual ~DropFlow();
 
 	void setSpan(int span);
@@ -21,10 +21,11 @@ protected:
 	virtual void display();
 	void move();
 
-	int _length;
-	std::string _str;
-	int _index;
 	WINDOW *_win;
+	int _index;
+	int _length;
+	int _color_pair;
+	std::string _str;
 	std::vector<int> _headers;
 
 private:

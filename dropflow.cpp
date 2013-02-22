@@ -1,15 +1,17 @@
 #include "dropflow.h"
 
-DropFlow::DropFlow(WINDOW *win, int index, int span, int indent)
+DropFlow::DropFlow(WINDOW *win, int index, int span, int color_pair, int indent)
 {
 	_win = win;
 	_index = index;
 	_span = span;
-	_counter = 0;
+	_color_pair = color_pair;
+	
 	_fillspace = indent;
-	_length = COLS;
 
+	_length = COLS;
 	_str.resize(_length, ' ');
+	_counter = 0;
 }
 
 DropFlow::~DropFlow()
@@ -33,7 +35,7 @@ void DropFlow::display()
 	this->transform();
 	this->move();
 
-	wattron(_win, COLOR_PAIR(1));
+	wattron(_win, COLOR_PAIR(_color_pair));
 	mvwprintw(_win, _index, 0, "%s", _str.c_str());
 
 	wattron(_win, A_BOLD);

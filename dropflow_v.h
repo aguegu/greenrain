@@ -6,7 +6,7 @@
 class DropFlowV: public DropFlow
 {
 public:
-	DropFlowV(WINDOW *win, int index, int span = 1, int indent = 0);
+	DropFlowV(WINDOW *win, int index, int span = 1, int color_pair = 0, int indent = 0);
 	virtual ~DropFlowV();
 	void display();
 };
