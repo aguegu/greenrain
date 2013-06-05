@@ -2,6 +2,8 @@ greenrain
 =========
 
 Generate Green Rain / Matrix Digital Rain in Linux Terminal in GCC with curses lib.
+prerequisite: build-essential, libncurses5-dev
+
 
 Screenshots:
 ![classic vertical greenrain](http://i1164.photobucket.com/albums/q566/aguegu/AguMill/Screenshotfrom2013-02-21234846_zps8ed74ca2.png)
